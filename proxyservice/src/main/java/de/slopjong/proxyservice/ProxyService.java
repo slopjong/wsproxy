@@ -34,9 +34,16 @@ public class ProxyService
     			"http://get-corporate.com:8080/services/MathService"
     	};
     	
-        ServiceClient client = null;
+        ServiceClient client = createServiceClient();
     	OMFactory factory = OMAbstractFactory.getOMFactory();
-     	
+ 	
+    	// create the method call object
+    	OMNamespace omNs = factory.createOMNamespace("http://mathservice.slopjong.de", "ns"); 
+    	OMElement method = factory.createOMElement("calculate", omNs); 
+    	OMElement value = factory.createOMElement("math", omNs); 
+    	value.setText(argument); 
+    	method.addChild(value);
+    	
     	/*
     	AxisService service = new AxisService();
     	AxisEndpoint endpoint = new AxisEndpoint();
@@ -44,49 +51,18 @@ public class ProxyService
     	service.addEndpoint("1", endpoint);
     	*/
     	
-
     	for(String endpoint : endpoints)
-    	{
-        	// create the method call object
-        	OMNamespace omNs = factory.createOMNamespace("http://mathservice.slopjong.de", "ns"); 
-        	OMElement method = factory.createOMElement("calculate", omNs); 
-        	OMElement value = factory.createOMElement("math", omNs); 
-        	value.setText(argument); 
-        	method.addChild(value);
-    		
-	        try
-	        {
-	        	client = new ServiceClient();
-	        	
-	        	//client.getOptions().setProperty(HTTPConstants.REUSE_HTTP_CLIENT, "true");
-	        	
-	        	
-	        	// See [0]
-	        	ConfigurationContext configurationContext = client.getServiceContext()
-	        														.getConfigurationContext();
-
-	        	// increase the MAX possible parallel connections
-	        	MultiThreadedHttpConnectionManager conmgr = new MultiThreadedHttpConnectionManager();
-	        	conmgr.getParams().setDefaultMaxConnectionsPerHost(20);
-	        	HttpClient httpclient = new HttpClient(conmgr);
-	        	configurationContext.setProperty(HTTPConstants.CACHED_HTTP_CLIENT, httpclient);
-				
-	        }
-	        catch ( AxisFault e )
-	        { 
-	        	throw new AxisFault( "Could not create the service client. Reason: "+ e.getMessage() );
-	        }
-	         
+    	{  
 	        // getting & setting the endpoint reference
-	        Options opts = new Options();
+	        Options opts = client.getOptions();
 	        opts.setTo( new EndpointReference(endpoint) );
 	        opts.setAction(action);
 	        
-	        client.setOptions( opts );
-	        
 	        try
-	        {        	        	
-		        client.sendReceiveNonBlocking(method, new AxisCallback() {
+	        {        	     
+	        	// the OMElement needs to be cloned because after the first
+	        	// usage it will be damaged
+		        client.sendReceiveNonBlocking(method.cloneOMElement(), new AxisCallback() {
 					
 		        	public void onComplete() 
 		        	{
@@ -128,6 +104,39 @@ public class ProxyService
 	        }
     	}
     }
+    
+    /**
+     * Creates a service client which allows 20 parallel connections.
+     * 
+     * @return
+     * @throws AxisFault
+     */
+    private ServiceClient createServiceClient()
+	throws AxisFault
+	{
+		try
+        {
+        	ServiceClient client = new ServiceClient();
+        	
+        	//client.getOptions().setProperty(HTTPConstants.REUSE_HTTP_CLIENT, "true");
+        	 	
+        	// See [0]
+        	ConfigurationContext configurationContext = client.getServiceContext()
+        														.getConfigurationContext();
+
+        	// increase the MAX possible parallel connections
+        	MultiThreadedHttpConnectionManager conmgr = new MultiThreadedHttpConnectionManager();
+        	conmgr.getParams().setDefaultMaxConnectionsPerHost(20);
+        	HttpClient httpclient = new HttpClient(conmgr);
+        	configurationContext.setProperty(HTTPConstants.CACHED_HTTP_CLIENT, httpclient);
+			
+        	return client;
+        }
+        catch ( AxisFault e )
+        { 
+        	throw new AxisFault( "Could not create the service client. Reason: "+ e.getMessage() );
+        }
+	}
 }
 
 /*
