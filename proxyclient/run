@@ -1,0 +1,3 @@
+#!/bin/bash
+
+java -cp classes:target/proxyclient-1.0.jar de.slopjong.proxyclient.ProxyClient

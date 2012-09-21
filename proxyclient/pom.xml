@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.slopjong.proxyclient</groupId>
+    <artifactId>proxyclient</artifactId>
+    <version>1.0</version>
+    <name>Proxy Client</name>
+    <url>http://slopjong.de</url>
+    <packaging>jar</packaging>
+  
+    <build>
+      
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        
+        <plugins>
+			
+            <!-- skip the tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+             
+           	<plugin>
+                   <artifactId>maven-assembly-plugin</artifactId>
+                   <version>2.2</version>
+                   <executions>
+                           <execution>
+                                   <id>make-assembly</id>
+                                   <phase>package</phase>
+                                   <goals>
+                                           <goal>single</goal>
+                                   </goals>
+                                   <configuration>
+                                           <finalName>${project.artifactId}-${project.version}</finalName>
+                                           <appendAssemblyId>false</appendAssemblyId>
+                                           <!--
+                                           <filters>
+                                                   <filter>src/main/filters/${env}/${build.env}/filter-common.properties</filter>
+                                                   <filter>src/main/filters/${env}/${build.env}/filter-${user.name}.properties</filter>
+                                           </filters>
+                                           -->
+                                           <descriptors>
+                                                   <descriptor>src/main/assembly/distribution.xml</descriptor>
+                                           </descriptors>
+                                   </configuration>
+                           </execution>
+                   </executions>
+           </plugin>
+        </plugins>
+      
+    </build>
+    
+    <dependencies>
+
+        <dependency>
+        	<groupId>org.apache.ws.commons.axiom</groupId>
+        	<artifactId>axiom-api</artifactId>
+        	<version>1.2.13</version>
+        </dependency>
+	
+        <dependency>
+        	<groupId>org.apache.ws.commons.axiom</groupId>
+        	<artifactId>axiom-impl</artifactId>
+        	<version>1.2.13</version>
+        </dependency>
+	
+        <dependency>
+        	<groupId>commons-httpclient</groupId>
+        	<artifactId>commons-httpclient</artifactId>
+        	<version>3.1</version>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.apache.axis2</groupId>
+        	<artifactId>axis2</artifactId>
+        	<version>1.6.2</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.axis2</groupId>
+        	<artifactId>axis2-kernel</artifactId>
+        	<version>1.6.2</version>
+        </dependency>
+        <dependency>
+        	<groupId>wsdl4j</groupId>
+        	<artifactId>wsdl4j</artifactId>
+        	<version>1.6.2</version>
+        </dependency>
+    </dependencies>
+
+</project>
