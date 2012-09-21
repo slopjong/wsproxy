@@ -1,0 +1,147 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.slopjong.proxyservice</groupId>
+    <artifactId>proxyservice</artifactId>
+    <version>1.0</version>
+    <name>Proxy Service</name>
+    <url>http://slopjong.de</url>
+    <packaging>jar</packaging>
+  
+    <build>
+      
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        
+        <plugins>
+			
+            <plugin>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-java2wsdl-maven-plugin</artifactId>
+                <version>1.6.2</version>
+                <configuration>
+                    <className>de.slopjong.proxyservice.ProxyService</className>
+                    <serviceName>ProxyService</serviceName>
+                    <!-- the wsdl2code plugin will look for the following default path -->
+                    <!-- <outputFileName>src/main/axis2/service.wsdl</outputFileName> -->
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- 
+                             this plugin mustn't be triggered earlier than the compile
+                             phase because a NullPointerException will be raised otherwise.
+                        -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>java2wsdl</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>          
+
+            <plugin>
+            	<groupId>org.apache.axis2</groupId>
+            	<artifactId>axis2-wsdl2code-maven-plugin</artifactId>
+            	<version>1.6.2</version>
+            	<executions>
+            		<execution>
+            			<phase>prepare-package</phase>
+            			<goals>
+            				<goal>wsdl2code</goal>
+            			</goals>
+            			<configuration>
+            				<wsdlFile>target/generated-resources/service.wsdl</wsdlFile>
+            				<generateServicesXml>true</generateServicesXml>
+            				<generateServerSide>true</generateServerSide>
+            				<packageName>de.slopjong.proxyservice</packageName>
+            			</configuration>
+            		</execution>
+            	</executions>
+            </plugin>
+                               
+            <plugin>
+                <groupId>org.apache.axis2</groupId>
+                <artifactId>axis2-aar-maven-plugin</artifactId>
+                <version>1.6.2</version>
+                <configuration>
+   					<servicesXmlFile>src/main/resources/services.xml</servicesXmlFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+							<goal>aar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+           
+            <plugin>
+			    <artifactId>maven-antrun-plugin</artifactId>
+			    <version>1.7</version>
+			    <executions>
+			    	<execution>
+			    		<id>deploy_to_tomxis2</id>
+			    		<phase>package</phase>
+			    		<goals>
+			    			<goal>run</goal>
+			    		</goals>
+			    		<configuration>
+			    			<target>
+			    				<move file="target/${project.artifactId}-${project.version}.aar" tofile="../Tomxis2/src/main/webapp/WEB-INF/services/${project.artifactId}-${project.version}.aar"/>
+			    			</target>
+			    		</configuration>
+			    	</execution>
+			    </executions>
+			</plugin>
+			
+            <!-- skip the tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12</version>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+             
+        </plugins>
+      
+    </build>
+    
+    <dependencies>
+        
+        <dependency>
+            <groupId>org.apache.axis2</groupId>
+            <artifactId>axis2</artifactId>
+            <version>1.6.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- what is this for? is it needed? -->
+        <dependency>
+            <groupId>org.apache.directory.studio</groupId>
+            <artifactId>org.apache.commons.logging</artifactId>
+            <version>1.1.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+        	<groupId>org.apache.ws.commons.axiom</groupId>
+        	<artifactId>axiom-api</artifactId>
+        	<version>1.2.13</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.apache.ws.commons.axiom</groupId>
+        	<artifactId>axiom-impl</artifactId>
+        	<version>1.2.13</version>
+        </dependency>
+    </dependencies>
+
+</project>

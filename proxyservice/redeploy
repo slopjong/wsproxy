@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# This script assumes that the Tomxis2 framework is cloned in ../
+
+cp target/proxyservice-1.0.aar ../Tomxis2/src/main/webapp/WEB-INF/services

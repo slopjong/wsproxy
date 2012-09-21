@@ -1,0 +1,3 @@
+[submodule "Tomxis2"]
+	path = Tomxis2
+	url = git://github.com/slopjong/Tomxis2.git
