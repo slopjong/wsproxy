@@ -75,6 +75,14 @@ public class ProxyClient
 	{
 		try
         {
+			// TODO: fix this issue:
+			//
+			//	Sep 25, 2012 8:25:42 AM org.apache.axiom.util.stax.dialect.StAXDialectDetector detectDialect
+			//	WARNING: Unable to determine dialect of the StAX implementation at jar:file:/home/slopjong/workspaces/wsproxy/proxyclient/target/proxyclient-1.0.jar!/
+			//	org.apache.axis2.AxisFault: Could not create the service client. Reason: org.apache.axis2.transport.local.LocalTransportSender
+			//	at de.slopjong.proxyclient.ProxyClient.createServiceClient(ProxyClient.java:97)
+			//	at de.slopjong.proxyclient.ProxyClient.main(ProxyClient.java:34)
+			//
         	RPCServiceClient client = new RPCServiceClient();
         	client.getOptions().setTo(new EndpointReference(endpoint));
         	
@@ -101,4 +109,5 @@ public class ProxyClient
 
 /*
  [0] http://axis.apache.org/axis2/java/core/docs/http-transport.html#setting_cached_httpclient_object
+ [1] http://stackoverflow.com/questions/2953557/running-an-axis2-client-version-1-5
 */
