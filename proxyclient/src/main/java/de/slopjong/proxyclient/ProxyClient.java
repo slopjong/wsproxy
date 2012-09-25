@@ -9,6 +9,7 @@ import org.apache.axiom.om.OMNamespace;
 import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
+import org.apache.axis2.client.ServiceClient;
 import org.apache.axis2.context.ConfigurationContext;
 import org.apache.axis2.rpc.client.RPCServiceClient;
 import org.apache.axis2.transport.http.HTTPConstants;
@@ -24,14 +25,17 @@ public class ProxyClient
 {	
 	public static void main(String args[])
 	{
-        RPCServiceClient client;
+        ServiceClient client;
         
+        // proxy relevant data
 		String endpoint = "http://localhost:8080/services/ProxyService";
-		String argument = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><times/><cn>13</cn><cn>2</cn></apply></math>";
-    	String action = "urn:calculate";
+    	String action = "urn:execute";
+    	
+    	// payload of the actual web service
+    	String argument = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><times/><cn>13</cn><cn>2</cn></apply></math>";
     	
 		try {
-			client = createServiceClient(endpoint);
+			client = createServiceClient();
 		} catch (AxisFault e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -41,27 +45,58 @@ public class ProxyClient
         // setting the soap action
         Options opts = client.getOptions();
         opts.setAction(action);
+        opts.setTo( new EndpointReference(endpoint) );
         
-        // create the method call object for the actual web service
         OMFactory factory = OMAbstractFactory.getOMFactory();
-    	OMNamespace omNs = factory.createOMNamespace("http://mathservice.slopjong.de", "ns"); 
-    	OMElement method = factory.createOMElement("calculate", omNs); 
-    	OMElement value = factory.createOMElement("math", omNs); 
-    	value.setText(argument);
-    	method.addChild(value);
-    	
-    	opts.setTo( new EndpointReference(endpoint) );
         
+        // create the method call object for the proxy web service 
+        OMNamespace proxyNs = factory.createOMNamespace("http://proxyservice.slopjong.de", "ns");
+        OMElement executeMethod = factory.createOMElement("execute", proxyNs);
+    	OMElement method = createPayload(argument, factory, proxyNs);
+    	executeMethod.addChild(method);
+    	
     	Object proxy_args[] = null;
     	
         try
         {        	     
-        	OMElement result = client.invokeBlocking(new QName("execute"), proxy_args);
+        	OMElement result = client.sendReceive(method);
+        	System.out.println(result.getFirstElement().toString());
         }
         catch ( AxisFault e )
         {
         	e.printStackTrace();       
         }
+	}
+
+	private static OMElement createPayload(String argument, OMFactory factory,
+			OMNamespace proxyNs) 
+	{
+		OMElement payload = factory.createOMElement("payload", proxyNs);
+		
+		// create the method call for the actual web service 
+    	OMElement method = factory.createOMElement("calculate", null); 
+    	
+    	// the web service argument
+    	OMElement value = factory.createOMElement("math", null);
+    	value.setText(argument); 
+    	method.addChild(value);
+    	payload.addChild(method);
+    	
+    	// the web service namespace
+    	OMElement wsns = factory.createOMElement("namespace", null); 
+    	wsns.setText("http://mathservice.slopjong.de"); 
+    	payload.addChild(wsns);
+    	
+    	// the action of the web service called by the proxy
+    	OMElement saction = factory.createOMElement("action", null); 
+    	saction.setText("urn:calculate"); 
+    	payload.addChild(saction);
+    	
+    	OMElement portType = factory.createOMElement("porttype", null);
+    	portType.setText("MathServicePortType");
+    	payload.addChild(portType);
+    	
+		return payload;
 	}
 
     /**
@@ -70,13 +105,12 @@ public class ProxyClient
      * @return
      * @throws AxisFault
      */
-    private static RPCServiceClient createServiceClient(String endpoint)
+    private static ServiceClient createServiceClient()
 	throws AxisFault
 	{
 		try
         {
-        	RPCServiceClient client = new RPCServiceClient();
-        	client.getOptions().setTo(new EndpointReference(endpoint));
+        	ServiceClient client = new ServiceClient();
         	
         	//client.getOptions().setProperty(HTTPConstants.REUSE_HTTP_CLIENT, "true");
         	 	
@@ -85,10 +119,12 @@ public class ProxyClient
         														.getConfigurationContext();
 
         	// increase the MAX possible parallel connections
+        	//*
         	MultiThreadedHttpConnectionManager conmgr = new MultiThreadedHttpConnectionManager();
         	conmgr.getParams().setDefaultMaxConnectionsPerHost(20);
         	HttpClient httpclient = new HttpClient(conmgr);
         	configurationContext.setProperty(HTTPConstants.CACHED_HTTP_CLIENT, httpclient);
+        	//*/
 			
         	return client;
         }

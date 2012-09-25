@@ -1,5 +1,10 @@
 package de.slopjong.proxyservice;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import javax.xml.namespace.QName;
+
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.OMFactory;
@@ -22,49 +27,42 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
  */
 public class ProxyService
 {	
-    public void execute()
+    public OMElement execute(OMElement wsmethod, OMElement namespace, OMElement action, OMElement porttype)
     throws AxisFault
     {   
-    	String argument = "<math xmlns=\"http://www.w3.org/1998/Math/MathML\"><apply><times/><cn>13</cn><cn>2</cn></apply></math>";
-    	String action = "urn:calculate";
+    	// replace the namespace with the correct web service namespace
+    	// TODO: check if this substitution is really required. Maybe the this
+    	//       is the result of a former misbehaviour of the client?
+    	//       => try to set the namespace in the client
+    	OMFactory factory = OMAbstractFactory.getOMFactory();
+    	OMNamespace wsns = factory.createOMNamespace(namespace.getText(), "ns");
+    	wsmethod.setNamespace(wsns);
     	
+    	// TODO: put this in a list and fetch them according to the passed porttype
     	String endpoints[] = {
     			"http://93.92.148.20:8080/services/MathService",
     			"http://131.246.103.5:8989/services/MathService",
     			"http://get-corporate.com:8080/services/MathService"
     	};
     	
-        ServiceClient client = createServiceClient();
-    	OMFactory factory = OMAbstractFactory.getOMFactory();
- 	
-    	// create the method call object
-    	OMNamespace omNs = factory.createOMNamespace("http://mathservice.slopjong.de", "ns"); 
-    	OMElement method = factory.createOMElement("calculate", omNs); 
-    	OMElement value = factory.createOMElement("math", omNs); 
-    	value.setText(argument); 
-    	method.addChild(value);
+        ServiceClient client = createServiceClient();	
     	
-    	/*
-    	AxisService service = new AxisService();
-    	AxisEndpoint endpoint = new AxisEndpoint();
-    	endpoint.setEndpointURL("http://93.92.148.20:8080/services/MathService");
-    	service.addEndpoint("1", endpoint);
-    	*/
+    	final ArrayList<OMElement> resultList = new ArrayList<OMElement>();
     	
     	for(String endpoint : endpoints)
     	{  
-	        // getting & setting the endpoint reference
 	        Options opts = client.getOptions();
 	        opts.setTo( new EndpointReference(endpoint) );
-	        opts.setAction(action);
+	       
+	        opts.setAction(action.getText());
 	        
 	        try
 	        {        	     
 	        	// the OMElement needs to be cloned because after the first
 	        	// usage it will be damaged
-		        client.sendReceiveNonBlocking(method.cloneOMElement(), new AxisCallback() {
+		        client.sendReceiveNonBlocking(wsmethod.cloneOMElement(), new AxisCallback() {
 					
-		        	public void onComplete() 
+		        	public void onComplete()
 		        	{
 		        		System.out.println("complete");
 		        	}
@@ -91,7 +89,7 @@ public class ProxyService
 		        		OMElement serviceResponse = arg0.getEnvelope().getBody().getFirstElement();
 		        		OMElement methodReturn = serviceResponse.getFirstElement();
 		        		
-		        		System.out.println(methodReturn.getText());
+		        		resultList.add(methodReturn);
 		        	}
 				});
 		       
@@ -102,7 +100,23 @@ public class ProxyService
 	        {
 	        	throw new AxisFault( "Something went wrong while executing the service and cleaning up:" + e.getMessage() );       
 	        }
+	        
     	}
+    	
+        // TODO: how to do a passive event loop?
+        while(resultList.isEmpty())
+        {
+        	try
+        	{
+        		Thread.currentThread().sleep(1);
+    		}
+    		catch(Exception e)
+    		{
+    			e.printStackTrace();
+    		}
+        }
+        
+        return resultList.get(0);
     }
     
     /**
