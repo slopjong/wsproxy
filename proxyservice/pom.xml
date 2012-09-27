@@ -147,6 +147,18 @@
         	<artifactId>commons-httpclient</artifactId>
         	<version>3.1</version>
         </dependency>
+        <!--
+        <dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+			<version>10.9.1.0</version>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>org.xerial</groupId>
+			<artifactId>sqlite-jdbc</artifactId>
+			<version>3.7.2</version>
+		</dependency>
     </dependencies>
 
 </project>
