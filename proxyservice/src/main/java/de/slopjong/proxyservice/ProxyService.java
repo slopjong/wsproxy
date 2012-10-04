@@ -28,7 +28,9 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
  *
  */
 public class ProxyService
-{	
+{
+	static ReputationManager repman = new ReputationManager();
+	
     public OMElement execute(OMElement wsmethod, OMElement namespace, OMElement action, OMElement porttype)
     throws AxisFault
     {   
@@ -44,7 +46,7 @@ public class ProxyService
     	
     	final ArrayList<OMElement> resultList = new ArrayList<OMElement>();
     	
-    	for(String endpoint : getEndpoints(porttype.getText()) )
+    	for(String endpoint : repman.getEndpoints(porttype.getText()) )
     	{  
 	        Options opts = client.getOptions();
 	        opts.setTo( new EndpointReference(endpoint) );
@@ -55,38 +57,10 @@ public class ProxyService
 	        {        	     
 	        	// the OMElement needs to be cloned because after the first
 	        	// usage it will be damaged
-		        client.sendReceiveNonBlocking(wsmethod.cloneOMElement(), new AxisCallback() {
-					
-		        	public void onComplete()
-		        	{
-		        		System.out.println("complete");
-		        	}
-	
-		        	public void onError(Exception arg0) 
-		        	{
-		        		System.out.println("error");
-		        	}
-	
-		        	public void onFault(MessageContext arg0) 
-		        	{		        		
-		        		System.out.println("fault");
-		        	}
-	
-		        	public void onMessage(MessageContext arg0) 
-		        	{		 
-		        		// TODO: some of the following lines triggers onError
-		        		//EndpointReference ref = arg0.getFrom();
-		        		//System.out.println(ref.getAddress());
-		        		//String soapAction = arg0.getSoapAction(); // urn:calculateResponse
-		        		//String wsaAction = arg0.getWSAAction(); // calculateResponse
-		        		//Options options = arg0.getOptions();
-		        		
-		        		OMElement serviceResponse = arg0.getEnvelope().getBody().getFirstElement();
-		        		OMElement methodReturn = serviceResponse.getFirstElement();
-		        		
-		        		resultList.add(methodReturn);
-		        	}
-				});
+		        client.sendReceiveNonBlocking(wsmethod.cloneOMElement(), 
+		        		new ServiceCallback(porttype.getText(),
+		        				action.getText(),
+		        				endpoint, resultList));
 		       
 		        client.cleanupTransport();
 		        //client.cleanup();
@@ -147,62 +121,9 @@ public class ProxyService
         }
 	}
     
-    private ArrayList<String> getEndpoints(String porttype)
-    {	
-    	// See [1] for the sqlite driver usage
-    	
-    	// load the sqlite-JDBC driver using the current class loader
-        try {
-			Class.forName("org.sqlite.JDBC");
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        
-        Connection connection = null;
-        try
-        {
-			// create a database connection
-			connection = DriverManager.getConnection("jdbc:sqlite:store.db");
-			  
-			Statement statement = connection.createStatement();
-			statement.setQueryTimeout(30);  // set timeout to 30 sec.
-			  
-			ResultSet rs = statement.executeQuery("select * from services where porttype='" + porttype + "'");
-	      	
-			ArrayList<String> endpoints = new ArrayList<String>();
-	      	
-			// this initializes a reversed list
-	      	while(rs.next())
-				endpoints.add(rs.getString("endpoint"));
-	      	
-	      	return endpoints;
-        }
-        catch(SQLException e)
-        {
-          // if the error message is "out of memory", 
-          // it probably means no database file is found
-          System.err.println(e.getMessage());
-        }
-        finally
-        {
-          try
-          {
-            if(connection != null)
-              connection.close();
-          }
-          catch(SQLException e)
-          {
-            // connection close failed.
-            System.err.println(e);
-          }
-        }
-        
-        return null;
-    }
+    
 }
 
 /*
  [0] http://axis.apache.org/axis2/java/core/docs/http-transport.html#setting_cached_httpclient_object
- [1] http://www.xerial.org/trac/Xerial/wiki/SQLiteJDBC#Usage
 */
