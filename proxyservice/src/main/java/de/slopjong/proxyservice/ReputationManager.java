@@ -65,6 +65,11 @@ public class ReputationManager
         
         return null;
     }
+	
+	public void calculateReputation(ResponseQueue queue)
+	{
+		
+	}
 }
 
 /*

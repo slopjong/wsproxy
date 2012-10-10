@@ -31,6 +31,11 @@ public class ProxyService
 {
 	static ReputationManager repman = new ReputationManager();
 	
+	public ProxyService()
+	{
+		System.out.println("Proxy service created");
+	}
+	
     public OMElement execute(OMElement wsmethod, OMElement namespace, OMElement action, OMElement porttype)
     throws AxisFault
     {   
@@ -46,7 +51,11 @@ public class ProxyService
     	
     	final ArrayList<OMElement> resultList = new ArrayList<OMElement>();
     	
-    	for(String endpoint : repman.getEndpoints(porttype.getText()) )
+    	ArrayList<String> endpoints = repman.getEndpoints(porttype.getText());
+    	
+    	ResponseQueue queue = new ResponseQueue(endpoints.size(), this);
+    	
+    	for(String endpoint : endpoints)
     	{  
 	        Options opts = client.getOptions();
 	        opts.setTo( new EndpointReference(endpoint) );
@@ -60,7 +69,7 @@ public class ProxyService
 		        client.sendReceiveNonBlocking(wsmethod.cloneOMElement(), 
 		        		new ServiceCallback(porttype.getText(),
 		        				action.getText(),
-		        				endpoint, resultList));
+		        				endpoint, resultList, queue));
 		       
 		        client.cleanupTransport();
 		        //client.cleanup();
@@ -121,7 +130,10 @@ public class ProxyService
         }
 	}
     
-    
+    void responseReady(ResponseQueue queue)
+    {
+    	System.out.println("queue full");
+    }
 }
 
 /*

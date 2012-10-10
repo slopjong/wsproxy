@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.3.1 r9886"
+   sodipodi:docname="architecture.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Mend"
+       style="overflow:visible;">
+      <path
+         id="path3854"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.4) rotate(180) translate(10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3848"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3845"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <filter
+       inkscape:collect="always"
+       id="filter6093"
+       x="-0.064257026"
+       width="1.1285141"
+       y="-0.19277108"
+       height="1.3855422"
+       color-interpolation-filters="sRGB">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.89250425"
+         id="feGaussianBlur6095" />
+    </filter>
+    <linearGradient
+       id="linearGradient5495"
+       inkscape:collect="always">
+      <stop
+         id="stop5497"
+         offset="0"
+         style="stop-color:#c6c6c6;stop-opacity:1" />
+      <stop
+         style="stop-color:#e3e3e3;stop-opacity:1"
+         offset="0.20484632"
+         id="stop5501" />
+      <stop
+         id="stop5499"
+         offset="1"
+         style="stop-color:#a5a5a8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient5466">
+      <stop
+         style="stop-color:#e3e3e3;stop-opacity:1"
+         offset="0"
+         id="stop5468" />
+      <stop
+         style="stop-color:#a5a5a8;stop-opacity:1"
+         offset="1"
+         id="stop5470" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient6035">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop6037" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop6039" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4864">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4866" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4868" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4871">
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1;"
+         offset="0"
+         id="stop4873" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:0;"
+         offset="1"
+         id="stop4875" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5495"
+       id="linearGradient5009"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.1818182,0,0,1.1818182,-30.64896,-69.394391)"
+       spreadMethod="reflect"
+       x1="269.96979"
+       y1="511.96591"
+       x2="286.62845"
+       y2="511.96591" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient5466"
+       id="linearGradient5011"
+       gradientUnits="userSpaceOnUse"
+       x1="282.35706"
+       y1="518.55707"
+       x2="286.6308"
+       y2="527.33539" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6035"
+       id="linearGradient5013"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,0.25)"
+       spreadMethod="reflect"
+       x1="308.5"
+       y1="522.61218"
+       x2="327.78125"
+       y2="520.32812" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6035"
+       id="linearGradient5015"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,12)"
+       spreadMethod="reflect"
+       x1="308.5"
+       y1="522.61218"
+       x2="327.78125"
+       y2="520.32812" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient6035"
+       id="linearGradient5017"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(0,22)"
+       spreadMethod="reflect"
+       x1="308.5"
+       y1="522.61218"
+       x2="327.78125"
+       y2="520.32812" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="433.52618"
+     inkscape:cy="954.48726"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="745"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.62562996;stroke-opacity:1"
+       id="rect3780"
+       width="80.438133"
+       height="107.25085"
+       x="229.79347"
+       y="140.46071"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <rect
+       y="164.71701"
+       x="209.03465"
+       height="107.25085"
+       width="80.438133"
+       id="rect3782"
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.62562996;stroke-opacity:1"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="221.85568"
+       y="218.84734"
+       id="text3786"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425"><tspan
+         sodipodi:role="line"
+         id="tspan3788"
+         x="221.85568"
+         y="218.84734"
+         style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans">Proxy</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="85.714287"
+       y="200.93361"
+       id="text3806"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="85.714287"
+         y="200.93361"
+         id="tspan3810" /></text>
+    <g
+       id="g3824"
+       transform="translate(-20.142857,-5.857143)"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425">
+      <g
+         transform="translate(7.1428573,32.857143)"
+         id="g3793">
+        <rect
+           style="fill:none;stroke:#000000;stroke-width:0.44456428;stroke-opacity:1"
+           id="rect2985"
+           width="80.138512"
+           height="34.224781"
+           x="46.261448"
+           y="91.839104" />
+        <text
+           xml:space="preserve"
+           style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           x="59.9767"
+           y="115.66194"
+           id="text3755"
+           sodipodi:linespacing="125%"><tspan
+             style="font-size:18px"
+             sodipodi:role="line"
+             id="tspan3757"
+             x="59.9767"
+             y="115.66194">Client</tspan></text>
+      </g>
+      <g
+         id="g3798"
+         transform="translate(7.1428574,177.14286)">
+        <rect
+           y="91.839104"
+           x="46.261448"
+           height="34.224781"
+           width="80.138512"
+           id="rect3800"
+           style="fill:none;stroke:#000000;stroke-width:0.44456428;stroke-opacity:1" />
+        <text
+           sodipodi:linespacing="125%"
+           id="text3802"
+           y="115.66194"
+           x="59.9767"
+           style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+           xml:space="preserve"><tspan
+             y="115.66194"
+             x="59.9767"
+             id="tspan3804"
+             sodipodi:role="line"
+             style="font-size:18px">Client</tspan></text>
+      </g>
+      <text
+         sodipodi:linespacing="100%"
+         id="text3814"
+         y="190.93361"
+         x="90.621513"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:100%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:18px;line-height:100%"
+           y="190.93361"
+           x="90.621513"
+           id="tspan3816"
+           sodipodi:role="line">.</tspan><tspan
+           id="tspan3818"
+           style="font-size:18px;line-height:100%"
+           y="208.93361"
+           x="90.621513"
+           sodipodi:role="line">.</tspan><tspan
+           id="tspan3820"
+           style="font-size:18px;line-height:100%"
+           y="226.93361"
+           x="90.621513"
+           sodipodi:role="line">.</tspan><tspan
+           id="tspan3822"
+           style="font-size:18px;line-height:100%"
+           y="244.93361"
+           x="90.621513"
+           sodipodi:role="line">.</tspan></text>
+    </g>
+    <path
+       style="opacity:0.98000004;fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 129.85714,136.50504 57.78341,21.10394"
+       id="path3839"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 129.14286,280.79075 62.9748,-18.27243"
+       id="path4471"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <g
+       id="g4992"
+       transform="matrix(1.0262851,0,0,1.0262851,261.0933,66.857969)"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425">
+      <g
+         transform="matrix(0.45580462,0,0,0.45580462,132.49025,-26.443942)"
+         id="g4964">
+        <g
+           id="g6097"
+           transform="matrix(2.2437381,0,0,2.2437381,-75.061845,-875.34791)">
+          <path
+             sodipodi:type="arc"
+             style="fill:#2e3436;fill-opacity:1;stroke:none;filter:url(#filter6093)"
+             id="path6079"
+             sodipodi:cx="286.6308"
+             sodipodi:cy="521.77954"
+             sodipodi:rx="16.667517"
+             sodipodi:ry="5.5558391"
+             d="m 303.29832,521.77954 c 0,3.06841 -7.46231,5.55584 -16.66752,5.55584 -9.20522,0 -16.66752,-2.48743 -16.66752,-5.55584 0,-3.0684 7.4623,-5.55584 16.66752,-5.55584 9.20521,0 16.66752,2.48744 16.66752,5.55584 z"
+             transform="matrix(1.1818182,0,0,1.1818182,-30.64896,-65.983596)" />
+          <path
+             inkscape:connector-curvature="0"
+             sodipodi:nodetypes="cccssscccc"
+             id="path5488"
+             d="m 288.40625,517.5 0,30.09191 0.125,0 c -0.0806,0.24126 -0.125,0.47032 -0.125,0.71875 0,3.6263 8.80861,6.5625 19.6875,6.5625 10.87889,0 19.6875,-2.9362 19.6875,-6.5625 0,-0.24879 -0.0442,-0.47715 -0.125,-0.71875 l 0.125,0 0,-30.09191 -39.375,0 z"
+             style="fill:url(#linearGradient5009);fill-opacity:1;stroke:none" />
+          <path
+             transform="matrix(1.1818182,0,0,1.1818182,-30.64896,-99.394391)"
+             d="m 303.29832,521.77954 c 0,3.06841 -7.46231,5.55584 -16.66752,5.55584 -9.20522,0 -16.66752,-2.48743 -16.66752,-5.55584 0,-3.0684 7.4623,-5.55584 16.66752,-5.55584 9.20521,0 16.66752,2.48744 16.66752,5.55584 z"
+             sodipodi:ry="5.5558391"
+             sodipodi:rx="16.667517"
+             sodipodi:cy="521.77954"
+             sodipodi:cx="286.6308"
+             id="path5460"
+             style="fill:url(#linearGradient5011);fill-opacity:1;stroke:none"
+             sodipodi:type="arc" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path6026"
+             d="m 288.375,539.09375 c 0.14735,3.58398 8.93182,6.46875 19.71875,6.46875 10.75628,0 19.4918,-2.86766 19.6875,-6.4375 -3.45152,2.93589 -10.95919,4.96875 -19.6875,4.96875 -8.74612,0 -16.27686,-2.05444 -19.71875,-5 z"
+             style="fill:#565656;fill-opacity:1;stroke:none" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path6030"
+             d="m 288.375,517.34375 c 0.14735,3.58398 8.93182,6.46875 19.71875,6.46875 10.75628,0 19.4918,-2.86766 19.6875,-6.4375 -0.21572,0.18349 -0.44078,0.35509 -0.6875,0.53125 -0.009,0.0117 -0.0216,0.0196 -0.0312,0.0312 -2.29214,2.77744 -9.90349,4.8125 -18.96875,4.8125 -9.12203,0 -16.78563,-2.07074 -19.03125,-4.875 -0.0249,-0.0179 -0.038,-0.0446 -0.0625,-0.0625 -0.21872,-0.15969 -0.43159,-0.30323 -0.625,-0.46875 z"
+             style="fill:url(#linearGradient5013);fill-opacity:1;stroke:none" />
+          <g
+             id="g6071">
+            <g
+               transform="translate(0,-0.52315203)"
+               id="g6067">
+              <path
+                 inkscape:connector-curvature="0"
+                 style="fill:#565656;fill-opacity:1;stroke:none"
+                 d="m 288.375,529.09375 c 0.14735,3.58398 8.93182,6.46875 19.71875,6.46875 10.75628,0 19.4918,-2.86766 19.6875,-6.4375 -3.45152,2.93589 -10.95919,4.96875 -19.6875,4.96875 -8.74612,0 -16.27686,-2.05444 -19.71875,-5 z"
+                 id="path6022" />
+              <path
+                 inkscape:connector-curvature="0"
+                 id="path6043"
+                 d="m 288.375,529.09375 c 0.14735,3.58398 8.93182,6.46875 19.71875,6.46875 10.75628,0 19.4918,-2.86766 19.6875,-6.4375 -0.0497,0.0422 -0.10543,0.0838 -0.15625,0.125 -1.24216,3.22677 -9.51064,5.71875 -19.53125,5.71875 -10.11275,0 -18.46774,-2.51121 -19.59375,-5.78125 -0.0401,-0.0317 -0.0863,-0.0607 -0.125,-0.0937 z"
+                 style="fill:url(#linearGradient5015);fill-opacity:1;stroke:none" />
+            </g>
+            <path
+               inkscape:connector-curvature="0"
+               id="path6054"
+               d="m 288.375,539.09375 c 0.14735,3.58398 8.93182,6.46875 19.71875,6.46875 10.75628,0 19.4918,-2.86766 19.6875,-6.4375 -0.0497,0.0422 -0.10543,0.0838 -0.15625,0.125 -1.24216,3.22677 -9.51064,5.71875 -19.53125,5.71875 -10.11275,0 -18.46774,-2.51121 -19.59375,-5.78125 -0.0401,-0.0317 -0.0863,-0.0607 -0.125,-0.0937 z"
+               style="fill:url(#linearGradient5017);fill-opacity:1;stroke:none" />
+          </g>
+          <path
+             inkscape:connector-curvature="0"
+             id="path6060"
+             d="m 288.5,549.9375 c 1.12601,3.27004 9.481,5.78125 19.59375,5.78125 10.02061,0 18.28909,-2.49198 19.53125,-5.71875 -3.51634,2.86779 -10.92856,4.84375 -19.53125,4.84375 -8.64783,0 -16.10003,-2.01374 -19.59375,-4.90625 z"
+             style="fill:#565656;fill-opacity:1;stroke:none" />
+        </g>
+      </g>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4988"
+         y="92.362183"
+         x="396.98712"
+         style="font-size:18px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         xml:space="preserve"><tspan
+           style="font-size:10px"
+           y="92.362183"
+           x="396.98712"
+           id="tspan4990"
+           sodipodi:role="line">SQLite</tspan></text>
+    </g>
+    <g
+       id="g5027"
+       transform="translate(44.285715,14.285714)"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425">
+      <rect
+         y="139.53534"
+         x="358.60175"
+         height="74.225105"
+         width="158.51082"
+         id="rect5019"
+         style="opacity:0.98000004;fill:none;stroke:#000000;stroke-width:1.06061065;stroke-opacity:1" />
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         x="388.634"
+         y="170.36371"
+         id="text5021"
+         sodipodi:linespacing="125%"><tspan
+           sodipodi:role="line"
+           id="tspan5023"
+           x="388.634"
+           y="170.36371"
+           style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans">Reputation</tspan><tspan
+           id="tspan5025"
+           sodipodi:role="line"
+           x="388.634"
+           y="192.86371"
+           style="font-size:18px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Sans;-inkscape-font-specification:Sans">Manager</tspan></text>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:url(#Arrow1Lend)"
+       d="m 576.7971,192.72237 69.70053,0"
+       id="path5033"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:none;marker-start:url(#Arrow1Lstart)"
+       d="m 318.19805,183.52947 c 0,0 20.51322,-13.87624 33.33504,-14.14214 12.82181,-0.26589 37.37564,14.14214 37.37564,14.14214"
+       id="path5403"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czc"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <path
+       sodipodi:nodetypes="czc"
+       inkscape:connector-curvature="0"
+       id="path5779"
+       d="m 318.19805,209.38369 c 0,0 20.51322,13.87624 33.33504,14.14214 12.82181,0.26589 37.37564,-14.14214 37.37564,-14.14214"
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="320.21835"
+       y="157.36702"
+       id="text6339"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425"><tspan
+         sodipodi:role="line"
+         x="320.21835"
+         y="157.36702"
+         id="tspan6343">Endpoints</tspan></text>
+    <text
+       sodipodi:linespacing="125%"
+       id="text6347"
+       y="240.31625"
+       x="352.52423"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       xml:space="preserve"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425"><tspan
+         y="240.31625"
+         x="352.52423"
+         sodipodi:role="line"
+         id="tspan6351"
+         style="text-align:center;text-anchor:middle">Reputation</tspan><tspan
+         y="256.56625"
+         x="352.52423"
+         sodipodi:role="line"
+         style="text-align:center;text-anchor:middle"
+         id="tspan6355">Input</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="204.05081"
+       y="297.77823"
+       id="text6357"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="204.05081"
+         y="297.77823"
+         id="tspan6361" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.2,3.6;stroke-dashoffset:0"
+       d="m 293.1122,210.84246 11.90263,-14.06675"
+       id="path6406"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path6408"
+       d="m 263.3127,159.57722 11.90263,-14.06675"
+       style="fill:none;stroke:#000000;stroke-width:1.2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:1.2,3.6;stroke-dashoffset:0"
+       inkscape:export-filename="/home/slopjong/workspaces/eclipse/wsproxy/doc/architecture.png"
+       inkscape:export-xdpi="25.873425"
+       inkscape:export-ydpi="25.873425" />
+  </g>
+</svg>

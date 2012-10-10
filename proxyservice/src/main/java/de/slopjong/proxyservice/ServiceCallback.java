@@ -11,8 +11,9 @@ implements AxisCallback
 {	
 	private ArrayList<String> triple;
 	private ArrayList<OMElement> resultList;
+	private ResponseQueue queue;
 	
-	public ServiceCallback(String porttype, String action, String endpoint, ArrayList<OMElement> results)
+	public ServiceCallback(String porttype, String action, String endpoint, ArrayList<OMElement> results, ResponseQueue queue)
 	{
 		triple = new ArrayList<String>();
 		triple.add(porttype);
@@ -20,6 +21,7 @@ implements AxisCallback
 		triple.add(endpoint);
 		
 		resultList = results;
+		this.queue = queue;
 	}
 	
 	public void onComplete()
@@ -49,6 +51,7 @@ implements AxisCallback
 		OMElement serviceResponse = arg0.getEnvelope().getBody().getFirstElement();
 		OMElement methodReturn = serviceResponse.getFirstElement();
 		
+		queue.add(triple);
 		resultList.add(methodReturn);
 	}
 }
