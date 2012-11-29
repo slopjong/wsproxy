@@ -51,7 +51,7 @@ public class ProxyService
     	
     	final ArrayList<OMElement> resultList = new ArrayList<OMElement>();
     	
-    	ArrayList<String> endpoints = repman.getEndpoints(porttype.getText());
+    	ArrayList<String> endpoints = repman.getEndpoints(porttype.getText(), action.getText());
     	
     	ResponseQueue queue = new ResponseQueue(endpoints.size(), this);
     	

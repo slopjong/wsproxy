@@ -1,0 +1,24 @@
+
+{title: "WS Proxy Service"; title-size: 20}
+
+# Entities
+
+[action]
+ *action_id
+  porttype
+  action
+  endpoint_id*
+
+[endpoint]
+ *endoint_id
+  endpoint
+  
+[reputation]
+ *reputation_id
+  action_id*
+  reputation
+  amount_reputations
+
+# Relationships
+[action] *--* [endpoint]
+[action] *--* [reputation]
