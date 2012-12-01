@@ -7,18 +7,24 @@
  *action_id
   porttype
   action
-  endpoint_id*
+  deployment_id*
 
 [endpoint]
  *endoint_id
   endpoint
-  
+
+[deployment]
+ *deoployment_id
+   action_id*
+   endpoint_id*
+   
 [reputation]
  *reputation_id
-  action_id*
-  reputation
-  amount_reputations
+   deployment_id
+   reputation
+   date
 
 # Relationships
-[action] *--* [endpoint]
-[action] *--* [reputation]
+[deployment] ---- [action]
+[deployment] ---- [endpoint]
+[deployment] ---- [reputation]

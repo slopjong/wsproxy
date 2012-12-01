@@ -12,6 +12,11 @@ public class ReputationManager
 {
 	static Logger logger = Logger.getLogger("de.slopjong.proxyservice.ReputationManager");
 	
+	public ReputationManager() 
+	{
+		logger.info("Reputation manager instantiated.'");
+	}
+	
 	public ArrayList<String> getEndpoints(String porttype, String action)
     {
 		logger.info("PortType is '"+ porttype +"' and Action is '"+ action +"'");
@@ -37,13 +42,13 @@ public class ReputationManager
 			Statement statement = connection.createStatement();
 			statement.setQueryTimeout(30);  // set timeout to 30 sec.
 			
-			String subquery = "SELECT endpoint_id AS ep_id,reputation FROM actions " +
-					"INNER JOIN reputations ON actions.action_id=reputations.action_id " +
-					"ORDER BY reputations.reputation";
-			
-			String query = "SELECT endpoint FROM endpoints " +
-					"INNER JOIN (" + subquery  + ") ON endpoints.endpoint_id=ep_id " +
-					"ORDER BY reputation DESC";
+			String query =
+					" SELECT endpoint FROM (SELECT endpoint,AVG(reputation) AS rep FROM deployments " +
+					" INNER JOIN actions ON deployments.action_id=actions.action_id " +
+					" INNER JOIN endpoints ON deployments.endpoint_id=endpoints.endpoint_id " +
+					" INNER JOIN reputations ON deployments.deployment_id=reputations.deployment_id " +
+					" GROUP BY endpoint " +
+					" ORDER BY rep DESC) ";
 			
 			logger.info("Executing the SQL query: "+ query);
 			
@@ -82,7 +87,7 @@ public class ReputationManager
 	
 	public void calculateReputation(ResponseQueue queue)
 	{
-		
+		logger.info("Calculating the reputation");
 	}
 }
 
