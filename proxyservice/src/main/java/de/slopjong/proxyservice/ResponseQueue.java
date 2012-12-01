@@ -1,6 +1,7 @@
 package de.slopjong.proxyservice;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 public class ResponseQueue
 {
@@ -8,9 +9,11 @@ public class ResponseQueue
 	private int max;
 	private ProxyService proxy;
 	
+	static Logger logger = Logger.getLogger("de.slopjong.proxyservice.ResponseQueue");
+	
 	public ResponseQueue(int max, ProxyService proxy)
 	{
-		System.out.println("Created response queue");
+		logger.info("Created response queue");
 		this.max = max;
 		this.proxy = proxy;
 		this.triples = new ArrayList<ArrayList<String>>();

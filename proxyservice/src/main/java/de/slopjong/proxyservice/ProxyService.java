@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.apache.axiom.om.OMAbstractFactory;
 import org.apache.axiom.om.OMElement;
@@ -30,10 +31,11 @@ import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
 public class ProxyService
 {
 	static ReputationManager repman = new ReputationManager();
+	static Logger logger = Logger.getLogger("de.slopjong.proxyservice.ProxyService");
 	
 	public ProxyService()
 	{
-		System.out.println("Proxy service created");
+		logger.info("Proxy service created");
 	}
 	
     public OMElement execute(OMElement wsmethod, OMElement namespace, OMElement action, OMElement porttype)
@@ -132,7 +134,8 @@ public class ProxyService
     
     void responseReady(ResponseQueue queue)
     {
-    	System.out.println("queue full");
+    	logger.info("queue full");
+    	repman.calculateReputation(queue);
     }
 }
 
