@@ -143,15 +143,17 @@ public class ReputationManager
 		List<HashMap<String,Object>> results = database.query(query);
 		int deploymentId = -1;
 		
-		// we expect only one row
-		if(results.size()<=1)
+		// we expect exactly one row
+		if(results.size() == 1)
 		{
 			HashMap<String,Object> row = results.get(0);
 			String id = row.get("deployment_id").toString();
 			deploymentId = Integer.parseInt(id);
 		}
-		else
+		else if(results.size() > 1)
 			logger.info("Only one ID was expected but got more");
+		else if(results.size() == 0)
+			logger.info("An ID was expected but got none");
 		
 		return deploymentId;
 	}
