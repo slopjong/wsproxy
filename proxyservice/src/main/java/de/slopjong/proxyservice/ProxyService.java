@@ -55,7 +55,7 @@ public class ProxyService
     	
     	ArrayList<String> endpoints = repman.getEndpoints(porttype.getText(), action.getText());
     	
-    	ResponseQueue queue = new ResponseQueue(endpoints.size(), this);
+    	ReceiveOrder queue = new ReceiveOrder(endpoints.size(), this);
     	
     	for(String endpoint : endpoints)
     	{  
@@ -132,7 +132,7 @@ public class ProxyService
         }
 	}
     
-    void responseReady(ResponseQueue queue)
+    void responseReady(ReceiveOrder queue)
     {
     	logger.info("queue full");
     	repman.calculateReputation(queue);
