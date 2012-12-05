@@ -122,6 +122,7 @@ public class Database
         List<HashMap<String,Object>> ret = convertResultSetToList(resultSet);
         
         // TODO: free the connection on service shutdown
+        // close the statement and resultset, closing the connection is not enough as mentioned in [4]
         disconnect(connection, statement, resultSet);
         
         return ret;
@@ -166,4 +167,5 @@ public class Database
 /*  [0] http://www.xerial.org/trac/Xerial/wiki/SQLiteJDBC#Usage
  *  [2] http://stackoverflow.com/questions/482633/in-java-is-it-possible-to-know-whether-a-class-has-already-been-loaded
  *  [3] http://stackoverflow.com/a/10213258
+ *  [4] http://stackoverflow.com/questions/103938/resultset-not-closed-when-connection-closed
  */
