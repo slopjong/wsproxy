@@ -66,31 +66,34 @@ public class ReputationManager
 		
 		int amount = queue.size();
 		
+		logger.info("Got a list with " + amount + " endpoints");
+		
 		// iterate over the triples (porttype,action,endpoint)
 		for( int rank=1; rank<=amount; rank++)
 		{
 			// because the list got reversed 1 means the worst rank and rank=size means the best
-			float reputation = rank/amount;
+			float reputation = ( (float) rank) / amount;
 			ArrayList<String> triple = queue.get(rank-1);
 			String porttype = triple.get(0);
 			String action = triple.get(1);
 			String endpoint = triple.get(2);
 			
 			if(! setReputation(porttype, action, endpoint, reputation))
-				logger.info("Reputation could not be set");
+				logger.info("Reputation (" + reputation + ") for " + endpoint + " could not be set");
 		}
 	}
 	
 	
 	private boolean setReputation(String porttype, String action, String endpoint, float reputation)
 	{
+		if(reputation < 0 || reputation > 1)
+			return false;
+		
 		int deploymentId = getServiceDeploymentId(porttype, action, endpoint);
 		int amount = getAmountReputations(deploymentId);
 		
-		logger.info("Deployment ID is: " + deploymentId);
-		logger.info("amount is: " + amount);
-		
-		return false;
+		logger.info("Set reputation for deployment ID '" + deploymentId + 
+				"' which has " + amount + " reputations");
 		
 		// TODO: check the deployment ID against -1 which means an error
 		
