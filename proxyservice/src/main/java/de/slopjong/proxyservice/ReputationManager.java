@@ -41,11 +41,16 @@ public class ReputationManager
         
 		ArrayList<String> endpoints = new ArrayList<String>();
       	
-      	for( HashMap<String,Object> row : results)
+		if(results != null)
       	{
-      		String endpoint = row.get("endpoint").toString();
-      		endpoints.add(endpoint);	
+			for( HashMap<String,Object> row : results)
+	      	{
+	      		String endpoint = row.get("endpoint").toString();
+	      		endpoints.add(endpoint);	
+	      	}
       	}
+		else
+			logger.info("The database didn't return any results for the endpoints");
       	
       	return endpoints;
     }
@@ -141,13 +146,15 @@ public class ReputationManager
 				" INNER JOIN endpoints ON deployments.endpoint_id=endpoints.endpoint_id " +
 				" WHERE endpoint='"+ endpoint +"' AND action='"+ action +"' AND porttype='"+ porttype +"'";
 		
-		logger.info("Executing the SQL query: "+ query);
-		
 		List<HashMap<String,Object>> results = database.query(query);
 		int deploymentId = -1;
 		
 		// we expect exactly one row
-		if(results.size() == 1)
+		if(results == null)
+		{
+			logger.info("The database didn't return any results");
+		}
+		else if(results.size() == 1)
 		{
 			HashMap<String,Object> row = results.get(0);
 			String id = row.get("deployment_id").toString();

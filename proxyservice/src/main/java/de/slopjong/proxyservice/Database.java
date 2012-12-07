@@ -109,7 +109,8 @@ public class Database
         {  
 			statement = connection.createStatement();
 			statement.setQueryTimeout(30);  // set timeout to 30 sec.
-						
+		
+			logger.info("Executing the SQL query: "+ query);
 			resultSet = statement.executeQuery(query);
         }
         catch(SQLException e)
@@ -141,23 +142,26 @@ public class Database
 	    ResultSetMetaData md;
 	    List<HashMap<String,Object>> list = new ArrayList<HashMap<String,Object>>();
 	    
-		try 
-		{
-			md = rs.getMetaData();
-			int columns = md.getColumnCount();
-		 
-		    while (rs.next()) {
-		        HashMap<String,Object> row = new HashMap<String, Object>(columns);
-		        for(int i=1; i<=columns; ++i) {
-		            row.put(md.getColumnName(i),rs.getObject(i));
-		        }
-		        list.add(row);
-		    }
-		} 
-		catch (SQLException e) 
-		{
-			logger.info("Could not convert ResultMap to List<HashMap<String,Object>>");
-		}
+	    if(rs != null)
+	    {
+			try 
+			{
+				md = rs.getMetaData();
+				int columns = md.getColumnCount();
+			 
+			    while (rs.next()) {
+			        HashMap<String,Object> row = new HashMap<String, Object>(columns);
+			        for(int i=1; i<=columns; ++i) {
+			            row.put(md.getColumnName(i),rs.getObject(i));
+			        }
+			        list.add(row);
+			    }
+			} 
+			catch (SQLException e) 
+			{
+				logger.info("Could not convert ResultMap to List<HashMap<String,Object>>");
+			}
+	    }
 	    
 	    return list;
 	}
