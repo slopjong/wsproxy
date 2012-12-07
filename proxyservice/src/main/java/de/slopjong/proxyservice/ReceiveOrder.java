@@ -59,7 +59,7 @@ public class ReceiveOrder
 
 	/**
 	 * Add the triple to the list. Checks if the total amount of services got already processed and
-	 * notifies the reputation manager accordingly.
+	 * notifies the reputation manager accordingly. If the triple is already in the list nothing is appended.
 	 * 
 	 * @param list
 	 * @param triple
@@ -67,7 +67,10 @@ public class ReceiveOrder
 	 */
 	private boolean add(ArrayList<ArrayList<String>> list, ArrayList<String> triple)
 	{
-		boolean success = list.add(triple);
+		boolean success = true;
+	
+		if ( ! alreadyInserted(triple) )
+			list.add(triple);
 		
 		int amountAddedServices = success_list.size() + fail_list.size();
 		
@@ -75,6 +78,11 @@ public class ReceiveOrder
 			proxy.responseReady(this);
 		
 		return success;
+	}
+	
+	private boolean alreadyInserted(ArrayList<String> triple)
+	{
+		return fail_list.contains(triple) || success_list.contains(triple);
 	}
 	
 	/**
