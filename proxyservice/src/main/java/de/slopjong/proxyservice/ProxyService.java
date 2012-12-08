@@ -1,10 +1,5 @@
 package de.slopjong.proxyservice;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
@@ -16,9 +11,7 @@ import org.apache.axis2.AxisFault;
 import org.apache.axis2.addressing.EndpointReference;
 import org.apache.axis2.client.Options;
 import org.apache.axis2.client.ServiceClient;
-import org.apache.axis2.client.async.AxisCallback;
 import org.apache.axis2.context.ConfigurationContext;
-import org.apache.axis2.context.MessageContext;
 import org.apache.axis2.transport.http.HTTPConstants;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.MultiThreadedHttpConnectionManager;
@@ -54,6 +47,8 @@ public class ProxyService
     	final ArrayList<OMElement> resultList = new ArrayList<OMElement>();
     	
     	ArrayList<String> endpoints = repman.getEndpoints(porttype.getText(), action.getText());
+    	if ( endpoints.size() == 0 )
+    		logger.info("There are no endpoints");
     	
     	ReceiveOrder queue = new ReceiveOrder(endpoints.size(), this);
     	

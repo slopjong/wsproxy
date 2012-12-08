@@ -1,6 +1,7 @@
 package de.slopjong.proxyservice;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axis2.client.async.AxisCallback;
@@ -13,8 +14,11 @@ implements AxisCallback
 	private ArrayList<OMElement> resultList;
 	private ReceiveOrder order;
 	
+	static Logger logger = Logger.getLogger("de.slopjong.proxyservice.ServiceCallback");
+	
 	public ServiceCallback(String porttype, String action, String endpoint, ArrayList<OMElement> results, ReceiveOrder queue)
 	{
+		logger.info("Creating callback for a service invocation...");
 		triple = new ArrayList<String>();
 		triple.add(porttype);
 		triple.add(action);
