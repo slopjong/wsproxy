@@ -1,7 +1,5 @@
 package de.slopjong.proxyservice;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -23,6 +21,13 @@ public class ReputationManager
 	}
 	
 	
+	/**
+	 * Get a list of endpoints of the given porttype and action.
+	 * 
+	 * @param porttype
+	 * @param action
+	 * @return list of Axis2 service endpoint URLs
+	 */
 	public ArrayList<String> getEndpoints(String porttype, String action)
     {
 		logger.info("PortType is '"+ porttype +"' and Action is '"+ action +"'");
@@ -38,7 +43,22 @@ public class ReputationManager
 		logger.info("Executing the SQL query: "+ query);
         
 		List<HashMap<String,Object>> results = database.query(query);
-        
+		
+		// a size of 0 can mean that there are no reputations
+		if ( results.size() == 0)
+		{
+			logger.fine("No endpoints ordered by their reputation");
+			
+			query =
+					" SELECT endpoint FROM deployments " +
+					" INNER JOIN actions ON deployments.action_id=actions.action_id " +
+					" INNER JOIN endpoints ON deployments.endpoint_id=endpoints.endpoint_id " +
+					" GROUP BY endpoint ";
+			
+			results = database.query(query);
+			
+		}
+		
 		ArrayList<String> endpoints = new ArrayList<String>();
       	
 		if(results != null)
@@ -47,6 +67,7 @@ public class ReputationManager
 	      	{
 	      		String endpoint = row.get("endpoint").toString();
 	      		endpoints.add(endpoint);	
+	      		logger.fine("Endpoint added: " + endpoint);
 	      	}
       	}
 		else
@@ -88,7 +109,16 @@ public class ReputationManager
 		}
 	}
 	
-	
+	/**
+	 * Coordinates the insertion of the reputations. If the maximum amount of reputations, that should
+	 * not exceed, has been reached the oldest reputation is deleted from the database.
+	 * 
+	 * @param porttype
+	 * @param action
+	 * @param endpoint
+	 * @param reputation
+	 * @return
+	 */
 	private boolean setReputation(String porttype, String action, String endpoint, float reputation)
 	{
 		if(reputation < 0 || reputation > 1)
@@ -100,14 +130,14 @@ public class ReputationManager
 		logger.info("Set reputation for deployment ID '" + deploymentId + 
 				"' which has " + amount + " reputations");
 		
-		// TODO: check the deployment ID against -1 which means an error
+		// a deployment ID of -1 which means an error
+		if ( deploymentId == -1 )
+			return false;
 		
-		/*
 		if(amount == maxSavedReputations)
 			removeOldestReputation(deploymentId);
 		
 		return saveNewReputation(deploymentId, reputation);
-		*/
 	}
 	
 	
@@ -117,18 +147,36 @@ public class ReputationManager
 	 */
 	private void removeOldestReputation(int deploymentId)
 	{
+		String subquery = 
+				" SELECT reputation_id FROM reputations " +
+				" WHERE deployment_id=1 " +
+				" ORDER BY datetime ASC " +
+				" LIMIT 1; ";
 		
+		String query = 
+				" DELETE FROM reputations " +
+				" WHERE deployment_id=" + deploymentId;
+		
+		database.query(query);
 	}
 
 	
 	/**
 	 * Stores a new reputation for the passed deployment ID
+	 * 
 	 * @param deploymentId
 	 * @param reputation
 	 */
 	private boolean saveNewReputation(int deploymentId, float reputation)
 	{
-		return false;
+		
+		String query = 
+				" INSERT INTO reputations (deployment_id,datetime,reputation) " +
+				" VALUES(" + deploymentId + ",datetime('now','localtime')," + reputation + ")";
+		
+		database.query(query);
+		
+		return true;
 	}
 	
 	
@@ -144,7 +192,7 @@ public class ReputationManager
 				" SELECT deployment_id FROM deployments " +
 				" INNER JOIN actions ON deployments.action_id=actions.action_id " +
 				" INNER JOIN endpoints ON deployments.endpoint_id=endpoints.endpoint_id " +
-				" WHERE endpoint='"+ endpoint +"' AND action='"+ action +"' AND porttype='"+ porttype +"'";
+				" WHERE endpoint='"+ endpoint +"' AND action='"+ action +"' AND porttype='"+ porttype + "'";
 		
 		List<HashMap<String,Object>> results = database.query(query);
 		int deploymentId = -1;
@@ -175,7 +223,22 @@ public class ReputationManager
 	 */
 	private int getAmountReputations(int deploymentId)
 	{
-		return 3;
+		String query =
+				" SELECT COUNT(reputation) as amount FROM reputations " +
+				" WHERE deployment_id=" + deploymentId;
+		
+		List<HashMap<String,Object>> results = database.query(query);
+		
+		int amount = 0;
+		
+		if ( results != null && results.size() == 1 )
+		{
+			HashMap<String,Object> row = results.get(0);
+			String id = row.get("amount").toString();
+			amount = Integer.parseInt(id);
+		};
+		
+		return amount;
 	}
 	
 	
